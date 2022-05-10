@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ConvMonnaie</string>
+    <string-array name="liste_devises">
+        <item>Euros</item>
+        <item>Livre</item>
+        <item>Dollars</item>
+    </string-array>
+
+</resources>
