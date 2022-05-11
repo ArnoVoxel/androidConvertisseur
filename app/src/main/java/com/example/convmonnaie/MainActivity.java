@@ -96,15 +96,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-/*
-* 1 dollar US = 0.95 euro
-* 1 euro = 1.05 dollars US
-*
-* 1 livre = 1.17 euros
-* 1 euro = 0.85 livre
-*
-* 1 livre = 1.23 dollars US
-* 1 dollar US = 0.81 livre
-*
-* git test
-* */
