@@ -5,21 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        Spinner spinnerDepart = chargerSpinner(R.id.spinnerDepart);
+        Spinner spinnerArrivee = chargerSpinner(R.id.spinnerArrivee);
 
         // récupération des valeurs contenues dans les spinners
-        Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerDepart);
-        Spinner spinnerArrivee = (Spinner)findViewById(R.id.spinnerArrivee);
+        /*Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerDepart);
+        Spinner spinnerArrivee = (Spinner)findViewById(R.id.spinnerArrivee);*/
         EditText montant_convert = (EditText) findViewById(R.id.montant);
 
         // action du bouton convertir
@@ -93,6 +99,18 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
+    }
+
+    public ArrayList<String> chargeDevises(){
+        ArrayList<String> tableau_liste_devises = new ArrayList<String>(Convert.getConversionTable().keySet());
+        return tableau_liste_devises;
+    }
+
+    public Spinner chargerSpinner(int idView){
+        final Spinner spinner = (Spinner) findViewById(idView);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, chargeDevises());
+        spinner.setAdapter(adapter);
+        return spinner;
     }
 
 }
