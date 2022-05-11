@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ConvMonnaie</string>
+    <string-array name="liste_devises">
+        <item></item>
+        <item>Euros</item>
+        <item>Livre</item>
+        <item>Dollars</item>
+    </string-array>
+    <string name="devise_depart">Start Currency</string>
+    <string name="devise_arrivee">End Currency</string>
+    <string name="input_montant">Amount</string>
+    <string name="bouton_convertir">Convert</string>
+    <string name="bouton_quitter">Exit</string>
+    <string name="erreur_devise_depart">You must choose an item to convert from</string>
+    <string name="erreur_devise_arrivee">You must choose an item to convert to</string>
+    <string name="erreur_montant">invalide input</string>
+    <string name="erreur_devise_identique">choose two differrent currencies</string>
+    <string name="ok_conv1">You want to convert </string>
+    <string name="ok_conv2"> to </string>
+</resources>

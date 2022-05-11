@@ -14,7 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="20dp"
-            android:text="Devise départ"
+            android:text="@string/devise_depart"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30sp"
             android:textSize="20dp"
-            android:text="Devise arrivée"
+            android:text="@string/devise_arrivee"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:textSize="20dp"
-            android:text="Montant"
+            android:text="@string/input_montant"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +62,7 @@
                 android:id="@+id/convertir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Convertir"
+                android:text="@string/bouton_convertir"
                 android:layout_marginEnd="10dp">
             </Button>
 
@@ -70,7 +70,7 @@
                 android:id="@+id/quitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Quitter"
+                android:text="@string/bouton_quitter"
                 >
 
 

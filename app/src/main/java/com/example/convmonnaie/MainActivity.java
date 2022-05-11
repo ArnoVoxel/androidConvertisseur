@@ -16,54 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         // récupération des valeurs contenues dans les spinners
-        Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerArrivee);
-
-
+        Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerDepart);
         Spinner spinnerArrivee = (Spinner)findViewById(R.id.spinnerArrivee);
-
-
-        // Button btn = (Button)findViewById(R.id.convertir);
-
-        /*spinnerDepart.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View spinner, int position, long spinnerDepart) {
-                        Object objectDeviseDepart = parent.getItemAtPosition(position);
-                        String deviseDepart = objectDeviseDepart.toString();
-                        Toast.makeText(parent.getContext(), deviseDepart+" devise de départ", Toast.LENGTH_SHORT).show();
-                        // action du bouton convertir
-
-                        btn.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View v)
-                            {
-                                // affichage du toast
-                                Toast.makeText(getApplicationContext(),
-                                                deviseDepart,
-                                                Toast.LENGTH_LONG)
-                                        .show();
-
-
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                }
-        );*/
-
-
 
         // action du bouton convertir
         // à chaque clic récupérer le contenu du spinner pour l'envoyer
         // dans le Toast
         Button btn = (Button)findViewById(R.id.convertir);
+
         btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v)
@@ -71,16 +32,40 @@ public class MainActivity extends AppCompatActivity {
                 // récupération de la valeur du spinner
                 String deviseDepart = spinnerDepart.getSelectedItem().toString();
                 String deviseArrivee = spinnerArrivee.getSelectedItem().toString();
-
-                String message = "Vous voulez convertir des " + deviseDepart + " en " + deviseArrivee;
-
-                // affichage du toast
+/*
                 Toast.makeText(getApplicationContext(),
-                                message,
-                                Toast.LENGTH_LONG)
+                                "devise de départ : "+deviseDepart,
+                                Toast.LENGTH_SHORT)
                         .show();
+                Toast.makeText(getApplicationContext(),
+                                "devide d'arrivée : "+deviseArrivee,
+                                Toast.LENGTH_SHORT)
+                        .show();*/
 
+                if (deviseDepart.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_devise_depart,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                } else if(deviseArrivee.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                                R.string.erreur_devise_arrivee,
+                                Toast.LENGTH_SHORT)
+                        .show();
+                }else if(deviseDepart.equals(deviseArrivee)){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_devise_identique,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                } else {
+                    String message = R.string.ok_conv1+ " " + deviseDepart+ " " + R.string.ok_conv2 + " " + deviseArrivee;
 
+                    // affichage du toast
+                    Toast.makeText(getApplicationContext(),
+                                    message,
+                                    Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         });
     }
