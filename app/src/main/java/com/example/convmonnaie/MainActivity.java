@@ -5,17 +5,38 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
+
+    public ArrayList<String> chargeDevises(){
+        ArrayList<String> liste_tableau_devises = new ArrayList<String>(Convert.getConversionTable().keySet());
+
+        return liste_tableau_devises;
+    }
+
+    public Spinner chargerSpinner(int idView){
+        final Spinner spinner = (Spinner)findViewById(idView);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, chargeDevises());
+        spinner.setAdapter(adapter);
+        return spinner;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.activity_main);
+        chargerSpinner(R.id.spinnerDepart);
+        chargerSpinner(R.id.spinnerArrivee);
 
         // récupération des valeurs contenues dans les spinners
         Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerDepart);
@@ -58,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT)
                             .show();
                 }else {
+
                     try{
                         Double result = (Double)Convert.convertir(deviseDepart, deviseArrivee,Double.valueOf(montant_convert.getText().toString()));
 
@@ -66,7 +88,10 @@ public class MainActivity extends AppCompatActivity {
                                 + deviseDepart+ " "
                                 + getString(R.string.ok_conv_mil) + " "
                                 + deviseArrivee + " result : " + result;
+
+                        //affichage du Log
                         Log.d("MainActivity", message);
+
                         // affichage du toast
                         Toast.makeText(getApplicationContext(),
                                         message,
@@ -95,16 +120,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
+
 }
-/*
-* 1 dollar US = 0.95 euro
-* 1 euro = 1.05 dollars US
-*
-* 1 livre = 1.17 euros
-* 1 euro = 0.85 livre
-*
-* 1 livre = 1.23 dollars US
-* 1 dollar US = 0.81 livre
-*
-* git test
-* */
