@@ -2,9 +2,12 @@
     <string name="app_name">Mon SUPER convertisseur</string>
     <string-array name="liste_devises">
         <item></item>
-        <item>Euros</item>
+        <item>Euro</item>
+        <item>Dirham</item>
+        <item>Yen</item>
+        <item>Francs CFA</item>
         <item>Livre</item>
-        <item>Dollars</item>
+        <item>Dollars US</item>
     </string-array>
     <string name="devise_depart">Devise de Départ</string>
     <string name="devise_arrivee">Devise d\'Arrivée</string>
@@ -15,6 +18,6 @@
     <string name="erreur_devise_arrivee">Précisez une devise de arrivée</string>
     <string name="erreur_montant">Ce montant est invalide</string>
     <string name="erreur_devise_identique">les devises sont identiques</string>
-    <string name="ok_conv1">Vous voulez convertir des </string>
-    <string name="ok_conv2"> en </string>
+    <string name="ok_conv_deb">Vous voulez convertir des </string>
+    <string name="ok_conv_mil"> en </string>
 </resources>
