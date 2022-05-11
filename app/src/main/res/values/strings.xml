@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConvMonnaie</string>
+    <string name="app_name">Mon SUPER convertisseur</string>
     <string-array name="liste_devises">
         <item></item>
         <item>Euros</item>
@@ -7,7 +7,7 @@
         <item>Dollars</item>
     </string-array>
     <string name="devise_depart">Devise de Départ</string>
-    <string name="devise_arrivee">Devise Arrivée</string>
+    <string name="devise_arrivee">Devise d\'Arrivée</string>
     <string name="input_montant">Montant</string>
     <string name="bouton_convertir">Convertir</string>
     <string name="bouton_quitter">Quitter</string>
