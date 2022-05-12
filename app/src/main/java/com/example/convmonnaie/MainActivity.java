@@ -2,25 +2,26 @@ package com.example.convmonnaie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.VectorDrawable;
-import android.media.Image;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.view.ViewPropertyAnimator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
-import android.animation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
+
+    //Données membres
+    String deviseDepart = null;
+    String deviseArrivee = null;
+    Double montant = 0.0;
+
 
     public ArrayList<String> chargeDevises(){
         ArrayList<String> liste_tableau_devises = new ArrayList<String>(Convert.getConversionTable().keySet());
@@ -60,10 +61,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 // récupération de la valeur du spinner
-                String deviseDepart = spinnerDepart.getSelectedItem().toString();
-                String deviseArrivee = spinnerArrivee.getSelectedItem().toString();
+                deviseDepart = spinnerDepart.getSelectedItem().toString();
+                deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
                 //montant_convert.getText().toString();
+                montant = Double.valueOf(montant_convert.getText().toString());
 
                 if (deviseDepart.equals("")){
                     Toast.makeText(getApplicationContext(),
@@ -86,37 +88,10 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT)
                             .show();
                 }else {
-
-                    try{
-                        Double result = (Double)Convert.convertir(deviseDepart, deviseArrivee,Double.valueOf(montant_convert.getText().toString()));
-
-                        String message = getString(R.string.ok_conv_deb) + " "
-                                + montant_convert.getText().toString() + " "
-                                + deviseDepart+ " "
-                                + getString(R.string.ok_conv_mil) + " "
-                                + deviseArrivee + " result : " + result;
-
-                        //affichage du Log
-                        Log.d("MainActivity", message);
-
-                        // affichage du toast
-                        Toast.makeText(getApplicationContext(),
-                                        message,
-                                        Toast.LENGTH_LONG)
-                                .show();
-
-                        //animer le symbole €
-                        ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
-                        euro.animate().setDuration(500).rotationXBy(360);
-
-                    } catch (NumberFormatException e){
-                        Toast.makeText(getApplicationContext(),
-                                        R.string.erreur_montant,
-                                        Toast.LENGTH_LONG)
-                                .show();
-                    }
-
-
+                    //animer le symbole €
+                    ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
+                    euro.animate().setDuration(500).rotationXBy(360);
+                    sendElementToConvert();
 
                 }
             }
@@ -133,6 +108,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
+    public void sendElementToConvert(){
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("deviseDepart", deviseDepart);
+        intent.putExtra("deviseArrivee", deviseArrivee);
+        intent.putExtra("montant", montant);
+        startActivity(intent);
+    }
 
 }
