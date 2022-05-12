@@ -5,16 +5,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/convertisseur"
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:textSize="20dp"
             android:text="@string/devise_depart"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,11 +27,12 @@
             android:id="@+id/spinnerDepart"
             android:entries="@array/liste_devises">
         </Spinner>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="30sp"
-            android:textSize="20dp"
             android:text="@string/devise_arrivee"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,6 +67,7 @@
                 android:id="@+id/convertir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/test"
                 android:text="@string/bouton_convertir"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp">
@@ -73,11 +77,19 @@
                 android:id="@+id/quitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/test"
                 android:text="@string/bouton_quitter"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
                 >
-
-
             </Button>
+
+            <ImageView
+                android:id="@+id/symbolEuro"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:src="@drawable/ic_baseline_euro_symbol_24">
+            </ImageView>
         </LinearLayout>
 
     </LinearLayout>

@@ -2,22 +2,30 @@ package com.example.convmonnaie;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.VectorDrawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewPropertyAnimator;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
+import android.animation.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> chargeDevises(){
         ArrayList<String> liste_tableau_devises = new ArrayList<String>(Convert.getConversionTable().keySet());
+        liste_tableau_devises.add("");
+        Collections.sort(liste_tableau_devises);
 
         return liste_tableau_devises;
     }
@@ -96,6 +104,11 @@ public class MainActivity extends AppCompatActivity {
                                         message,
                                         Toast.LENGTH_LONG)
                                 .show();
+
+                        //animer le symbole €
+                        ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
+                        euro.animate().setDuration(500).rotationXBy(360);
+
                     } catch (NumberFormatException e){
                         Toast.makeText(getApplicationContext(),
                                         R.string.erreur_montant,
@@ -107,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
+
         });
 
         Button btn_quitter = (Button)findViewById(R.id.quitter);
