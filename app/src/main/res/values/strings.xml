@@ -20,5 +20,6 @@
     <string name="erreur_devise_identique">les devises sont identiques</string>
     <string name="ok_conv_deb">Vous voulez convertir des </string>
     <string name="ok_conv_mil"> en </string>
+    <string name="resultat">RESULTAT</string>
     <string name="retourResult">Retour</string>
 </resources>

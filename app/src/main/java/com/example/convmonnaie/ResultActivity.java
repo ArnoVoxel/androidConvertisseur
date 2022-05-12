@@ -36,10 +36,10 @@ public class ResultActivity extends AppCompatActivity {
         Log.d("ResultActivity", message);
 
         // affichage du toast
-        Toast.makeText(getApplicationContext(),
+        /*Toast.makeText(getApplicationContext(),
                         message,
                         Toast.LENGTH_LONG)
-                .show();
+                .show();*/
 
         // affichage dans le champ de texte
             TextView resultat = (TextView) findViewById(R.id.messageResult);

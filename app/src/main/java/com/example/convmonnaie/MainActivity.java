@@ -64,8 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 deviseDepart = spinnerDepart.getSelectedItem().toString();
                 deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
-                //montant_convert.getText().toString();
-                montant = Double.valueOf(montant_convert.getText().toString());
+
 
                 if (deviseDepart.equals("")){
                     Toast.makeText(getApplicationContext(),
@@ -88,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT)
                             .show();
                 }else {
+                    //montant_convert.getText().toString();
+                    montant = Double.valueOf(montant_convert.getText().toString());
                     //animer le symbole €
                     ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
                     euro.animate().setDuration(500).rotationXBy(360);
