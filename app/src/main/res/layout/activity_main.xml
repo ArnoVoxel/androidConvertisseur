@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/convertisseur"
     tools:context=".MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,9 +22,8 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="50sp"
-            android:id="@+id/spinnerDepart">
-<!--            android:entries="@array/liste_devises">-->
-
+            android:id="@+id/spinnerDepart"
+            android:entries="@array/liste_devises">
         </Spinner>
         <TextView
             android:layout_width="wrap_content"
@@ -39,8 +37,8 @@
         <Spinner
             android:layout_width="match_parent"
             android:layout_height="50sp"
-            android:id="@+id/spinnerArrivee">
-<!--            android:entries="@array/liste_devises">-->
+            android:id="@+id/spinnerArrivee"
+            android:entries="@array/liste_devises">
         </Spinner>
         <TextView
             android:layout_width="wrap_content"
@@ -81,7 +79,6 @@
 
             </Button>
         </LinearLayout>
-
 
     </LinearLayout>
 
