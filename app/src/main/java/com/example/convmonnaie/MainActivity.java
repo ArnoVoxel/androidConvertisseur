@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.ContextMenu;
@@ -17,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.Button;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     String deviseArrivee = null;
     Double montant = 0.0;
 
-
     public ArrayList<String> chargeDevises(){
         ArrayList<String> liste_tableau_devises = new ArrayList<String>(Convert.getConversionTable().keySet());
         liste_tableau_devises.add("");
@@ -40,20 +39,30 @@ public class MainActivity extends AppCompatActivity {
         return liste_tableau_devises;
     }
 
-    public Spinner chargerSpinner(int idView){
+    public Spinner chargerSpinner(int idView, String value){
         final Spinner spinner = (Spinner)findViewById(idView);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, chargeDevises());
         spinner.setAdapter(adapter);
+        // Récupérer la position correspondant à la valeur, dans l’adapter
+        int pos = adapter.getPosition(value);
+        // puis positionner le spinner
+        spinner.setSelection(pos);
         return spinner;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-        chargerSpinner(R.id.spinnerDepart);
-        chargerSpinner(R.id.spinnerArrivee);
+
+
+        SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs",MODE_PRIVATE);
+
+        String valeurSpinnerDepart = mesPrefs.getString("valeurDepart", "");
+        String valeurSpinnerArrivee = mesPrefs.getString("valeurArrivee", "");
+
+        chargerSpinner(R.id.spinnerDepart, valeurSpinnerDepart);
+        chargerSpinner(R.id.spinnerArrivee, valeurSpinnerArrivee);
 
         registerForContextMenu((ImageView)findViewById(R.id.gifChat));
 
@@ -197,6 +206,8 @@ public class MainActivity extends AppCompatActivity {
         deviseDepart = spinnerDepart.getSelectedItem().toString();
         deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
+        spinnerPref(deviseDepart, deviseArrivee);
+
         if (deviseDepart.equals("")){
             Toast.makeText(getApplicationContext(),
                             R.string.erreur_devise_depart,
@@ -327,5 +338,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    public void spinnerPref(String deviseDepart, String deviseArrivee){
+
+        SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs", MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = mesPrefs.edit();
+
+        editor.putString("valeurDepart", deviseDepart);
+        editor.putString("valeurArrivee", deviseArrivee);
+
+        editor.commit();
     }
 }

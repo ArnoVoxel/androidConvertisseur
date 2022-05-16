@@ -23,7 +23,7 @@
             app:layout_constraintTop_toTopOf="parent" />
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="40sp"
             android:id="@+id/spinnerDepart"
             android:entries="@array/liste_devises">
         </Spinner>
@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent" />
         <Spinner
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="40sp"
             android:id="@+id/spinnerArrivee"
             android:entries="@array/liste_devises">
         </Spinner>
@@ -61,7 +61,7 @@
         </EditText>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/convertir"

@@ -76,27 +76,50 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_marginTop="30dp">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/convertir"
-                android:text="Convertir"
-                android:layout_marginEnd="10dp">
-            </Button>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
 
             <Button
+                android:id="@+id/convertir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="Convertir"></Button>
+
+            <Button
                 android:id="@+id/quitter"
-                android:text="Quitter"
-                >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quitter">
 
 
             </Button>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/convertAR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                style="@style/test"
+                android:text="@string/convertAR"
+                >
+            </Button>
+        </LinearLayout>
+
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gifChat"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:src="@drawable/chat_volant"
+            android:layout_gravity="right"/>
 
     </LinearLayout>
 
