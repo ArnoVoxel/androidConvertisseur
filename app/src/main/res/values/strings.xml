@@ -23,6 +23,9 @@
     <string name="resultat">RESULTAT</string>
     <string name="retourResult">Retour</string>
     <string name="convertAR">Convertir AR</string>
+    <string name="erreur_champs">erreur de champs</string>
+    <string name="parametres">paramètres</string>
+
     <string name="title_activity_traitement">TraitementActivity</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
