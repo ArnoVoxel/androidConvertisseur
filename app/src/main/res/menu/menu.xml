@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <item android:id="@+id/convertirmenu"
-            android:title="@string/bouton_convertir" />
-        <item android:id="@+id/quittermenu"
-            android:title="@string/bouton_quitter" />
+            android:icon="@drawable/ic_action_convert"
+            android:title="@string/bouton_convertir"
+            app:showAsAction="ifRoom" />
         <item android:id="@+id/parametres"
-            android:title="@string/parametres" />
+            android:title="@string/parametres"
+            android:icon="@drawable/ic_action_settings"
+            app:showAsAction="ifRoom" />
+        <item android:id="@+id/quittermenu"
+            android:title="@string/bouton_quitter"
+            android:icon="@drawable/ic_action_cancel"
+            app:showAsAction="ifRoom" />
 
 </menu>

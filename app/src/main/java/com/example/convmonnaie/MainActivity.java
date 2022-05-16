@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         chargerSpinner(R.id.spinnerDepart);
         chargerSpinner(R.id.spinnerArrivee);
+
+        registerForContextMenu((ImageView)findViewById(R.id.gifChat));
 
         // récupération des valeurs contenues dans les spinners
         Spinner spinnerDepart = (Spinner)findViewById(R.id.spinnerDepart);
@@ -260,6 +263,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+        // On teste l’Id de l’item cliqué et on déclenche une action
+        switch (item.getItemId()) {
+            case R.id.convertirmenu:
+                if(controleChamps()){
+                    EditText montant_convert = (EditText) findViewById(R.id.montant);
+                    montant = Double.valueOf(montant_convert.getText().toString());
+                    //animer le symbole €
+                    ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
+                    euro.animate().setDuration(500).rotationXBy(360);
+                    sendElementToConvert();
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_champs,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                }
+                return true;
+            case R.id.quittermenu:
+                finish();
+                return true;
+            case R.id.parametres:
+                Intent changerLangue = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                startActivity(changerLangue);
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        // XML décrivant les options du menu contextuel
+        inflater.inflate(R.menu.menu, menu);
+    }
+
+    public boolean onContextItemSelected(MenuItem item) {
         // On teste l’Id de l’item cliqué et on déclenche une action
         switch (item.getItemId()) {
             case R.id.convertirmenu:
