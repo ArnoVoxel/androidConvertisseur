@@ -61,7 +61,7 @@
         </EditText>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:orientation="horizontal">
             <Button
                 android:id="@+id/convertir"
@@ -90,6 +90,22 @@
                 android:layout_height="50sp"
                 android:src="@drawable/ic_baseline_euro_symbol_24">
             </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+                <Button
+                    android:id="@+id/convertAR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    style="@style/test"
+                    android:text="@string/convertAR"
+                    >
+                </Button>
         </LinearLayout>
 
     </LinearLayout>

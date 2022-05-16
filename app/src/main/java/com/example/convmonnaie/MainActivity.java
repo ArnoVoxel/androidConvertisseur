@@ -1,5 +1,6 @@
 package com.example.convmonnaie;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -64,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                 deviseDepart = spinnerDepart.getSelectedItem().toString();
                 deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
-
-
                 if (deviseDepart.equals("")){
                     Toast.makeText(getApplicationContext(),
                                     R.string.erreur_devise_depart,
@@ -107,6 +106,47 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(0);
             }
         });
+
+        Button btn_ar = (Button) findViewById(R.id.convertAR);
+
+        btn_ar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // récupération de la valeur du spinner
+                deviseDepart = spinnerDepart.getSelectedItem().toString();
+                deviseArrivee = spinnerArrivee.getSelectedItem().toString();
+
+                if (deviseDepart.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_devise_depart,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                } else if(deviseArrivee.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_devise_arrivee,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                }else if(deviseDepart.equals(deviseArrivee)){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_devise_identique,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                } else if(montant_convert.getText().toString().equals("") ){
+                    Toast.makeText(getApplicationContext(),
+                                    R.string.erreur_montant,
+                                    Toast.LENGTH_SHORT)
+                            .show();
+                }else {
+                    //montant_convert.getText().toString();
+                    montant = Double.valueOf(montant_convert.getText().toString());
+                    //animer le symbole €
+                    ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
+                    euro.animate().setDuration(500).rotationXBy(360);
+                    sendElementtoconvertBack();
+                }
+            }
+        });
     }
 
     public void sendElementToConvert(){
@@ -117,4 +157,24 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void sendElementtoconvertBack(){
+        Intent intentConvert = new Intent(this, TraitementActivity.class);
+        intentConvert.putExtra("deviseDepart", deviseDepart);
+        intentConvert.putExtra("deviseArrivee", deviseArrivee);
+        intentConvert.putExtra("montant", montant);
+        startActivityForResult(intentConvert,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1)
+        {
+            String message = data.getStringExtra("retour");
+            Toast.makeText(getApplicationContext(),
+                            message,
+                            Toast.LENGTH_SHORT)
+                    .show();
+        }
+    }
 }

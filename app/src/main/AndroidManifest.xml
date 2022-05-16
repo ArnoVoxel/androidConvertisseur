@@ -15,9 +15,13 @@
         android:theme="@style/Theme.ConvMonnaie"
         tools:targetApi="31">
         <activity
+            android:name=".TraitementActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ResultActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

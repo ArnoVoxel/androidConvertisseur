@@ -22,4 +22,5 @@
     <string name="ok_conv_mil"> to </string>
     <string name="resultat">RESULT</string>
     <string name="retourResult">Back</string>
+    <string name="convertAR">Convert AR</string>
 </resources>
