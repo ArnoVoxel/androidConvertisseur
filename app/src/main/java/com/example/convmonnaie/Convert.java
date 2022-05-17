@@ -1,5 +1,7 @@
 package com.example.convmonnaie;
 
+import android.util.Log;
+
 import java.util.*;
 
 /**
@@ -11,9 +13,13 @@ public class Convert
 {
 	//private static Map conversionTable = new HashMap();
 	private static Map<String, Double> conversionTable = new HashMap<String, Double>();
-	
+
+	static {
+		conversionTable = MonnaieManager.listeMonnaies();
+	}
+
 	// static fonctionne comme un constructeur dans une classe static
-	static                                                                                                     
+	/*static
    	{                                                                                                                                               
    		conversionTable.put("Livre", Double.valueOf(0.6404));                                           
    		conversionTable.put("Euro", Double.valueOf(0.7697));                                          
@@ -21,7 +27,7 @@ public class Convert
    		conversionTable.put("Yen", Double.valueOf(76.6908));                                              
    		conversionTable.put("Francs CFA", Double.valueOf(503.17));                                         
    		conversionTable.put("Dollars US", Double.valueOf(1.0));                                                    
-   	}  
+   	}  */
 	
 	/**
 	 * Retourne un Double correspondant au <b>montant</b> en devise <b>source</b> converti en devise <b>cible</b></b>
@@ -31,7 +37,8 @@ public class Convert
 	 * @return le montant en devise cible
 	 */
    	public static double convertir(String source, String cible, double montant)                                                                                          
-   	{                                                                                                          
+   	{
+
    		double tauxSource = conversionTable.get(source);                    
    		double tauxCible = conversionTable.get(cible);                    
    		double tauxConversion = tauxCible/tauxSource;	                                                       
