@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.ContextMenu;
@@ -27,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
     public static final String DEVISE_DEPART = "deviseDepart";
     public static final String DEVISE_ARRIVEE = "deviseArrivee";
     public static final String MONTANT = "montant";
+
+    private static final String DB_NAME = "devises";
+    private static final int DB_VERSION = 1;
+    private static final String TABLE_NAME = "monnaies";
+    private static final String ID_COL = "id";
+    private static final String MONNAIE_COL = "monnaie";
+    private static final String TAUX_COL = "taux";
+
+    private Connexion connexion;
     String deviseDepart = null;
     String deviseArrivee = null;
     Double montant = 0.0;
@@ -55,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Connexion connexion = new Connexion(this, DB_NAME, null,DB_VERSION);
+        SQLiteDatabase bdd = connexion.getReadableDatabase();
 
         SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs",MODE_PRIVATE);
 
@@ -93,40 +105,7 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT)
                             .show();
                 }
-                /*
-                // récupération de la valeur du spinner
-                deviseDepart = spinnerDepart.getSelectedItem().toString();
-                deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
-                if (deviseDepart.equals("")){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_devise_depart,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                } else if(deviseArrivee.equals("")){
-                    Toast.makeText(getApplicationContext(),
-                                R.string.erreur_devise_arrivee,
-                                Toast.LENGTH_SHORT)
-                        .show();
-                }else if(deviseDepart.equals(deviseArrivee)){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_devise_identique,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                } else if(montant_convert.getText().toString().equals("") ){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_montant,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                }else {
-                    //montant_convert.getText().toString();
-                    montant = Double.valueOf(montant_convert.getText().toString());
-                    //animer le symbole €
-                    ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
-                    euro.animate().setDuration(500).rotationXBy(360);
-                    sendElementToConvert();
-
-                }*/
             }
 
         });
@@ -159,38 +138,6 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                 }
 
-                /*// récupération de la valeur du spinner
-                deviseDepart = spinnerDepart.getSelectedItem().toString();
-                deviseArrivee = spinnerArrivee.getSelectedItem().toString();
-
-                if (deviseDepart.equals("")){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_devise_depart,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                } else if(deviseArrivee.equals("")){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_devise_arrivee,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                }else if(deviseDepart.equals(deviseArrivee)){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_devise_identique,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                } else if(montant_convert.getText().toString().equals("") ){
-                    Toast.makeText(getApplicationContext(),
-                                    R.string.erreur_montant,
-                                    Toast.LENGTH_SHORT)
-                            .show();
-                }else {
-                    //montant_convert.getText().toString();
-                    montant = Double.valueOf(montant_convert.getText().toString());
-                    //animer le symbole €
-                    ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
-                    euro.animate().setDuration(500).rotationXBy(360);
-                    sendElementtoconvertBack();
-                }*/
             }
         });
     }
@@ -206,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
         deviseDepart = spinnerDepart.getSelectedItem().toString();
         deviseArrivee = spinnerArrivee.getSelectedItem().toString();
 
-        spinnerPref(deviseDepart, deviseArrivee);
 
         if (deviseDepart.equals("")){
             Toast.makeText(getApplicationContext(),
@@ -229,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT)
                     .show();
         } else {
+            spinnerPref(deviseDepart, deviseArrivee, montant);
             return true;
         }
         return false;
@@ -340,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
-    public void spinnerPref(String deviseDepart, String deviseArrivee){
+    public void spinnerPref(String deviseDepart, String deviseArrivee, Double montant){
 
         SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs", MODE_PRIVATE);
 
@@ -348,6 +295,7 @@ public class MainActivity extends AppCompatActivity {
 
         editor.putString("valeurDepart", deviseDepart);
         editor.putString("valeurArrivee", deviseArrivee);
+        editor.putFloat("montant", new Float(montant));
 
         editor.commit();
     }
