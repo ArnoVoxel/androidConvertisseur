@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         Connexion connexion = new Connexion(this, DB_NAME, null,DB_VERSION);
         connexion.getReadableDatabase();
 
-        MonnaieManager.listeMonnaies();
         Log.d("monnaiemanager",MonnaieManager.listeMonnaies().toString());
 
         SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs",MODE_PRIVATE);

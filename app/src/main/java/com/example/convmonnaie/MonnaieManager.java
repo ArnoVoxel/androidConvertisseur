@@ -25,7 +25,7 @@ public class MonnaieManager {
             if (c.moveToFirst()) {
                 do {
                     tableBDD.put(c.getString(0), Double.valueOf(c.getString(1)));
-                    Log.i("monnaie", c.getString(0)+" : "+ c.getString(1));
+                    Log.d("monnaie", c.getString(0)+" : "+ c.getString(1));
                 } while (c.moveToNext());
             }
         }
