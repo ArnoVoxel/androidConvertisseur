@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -31,12 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String DB_NAME = "devises";
     private static final int DB_VERSION = 1;
-    private static final String TABLE_NAME = "monnaies";
-    private static final String ID_COL = "id";
-    private static final String MONNAIE_COL = "monnaie";
-    private static final String TAUX_COL = "taux";
 
-    private Connexion connexion;
     String deviseDepart = null;
     String deviseArrivee = null;
     Double montant = 0.0;
@@ -66,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Connexion connexion = new Connexion(this, DB_NAME, null,DB_VERSION);
-        SQLiteDatabase bdd = connexion.getReadableDatabase();
+        connexion.getReadableDatabase();
+
+        MonnaieManager.listeMonnaies();
+        Log.d("monnaiemanager",MonnaieManager.listeMonnaies().toString());
 
         SharedPreferences mesPrefs = getSharedPreferences("ficherPrefs",MODE_PRIVATE);
 
@@ -99,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     ImageView euro = (ImageView) findViewById(R.id.symbolEuro);
                     euro.animate().setDuration(500).rotationXBy(360);
                     sendElementToConvert();
+
                 } else {
                     Toast.makeText(getApplicationContext(),
                                     R.string.erreur_champs,
